@@ -1,3 +1,8 @@
+Favorite.destroy_all
+User.destroy_all
+Dinosaur.destroy_all
+
+
 Dinosaur.create(
     name: "Allosaurus", 
     classification: "Theropod", 

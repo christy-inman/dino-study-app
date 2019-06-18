@@ -9,4 +9,14 @@ ActiveRecord::Base.establish_connection(
     database: "db/dinosaur_facts.db"
 )
 
+# ActiveRecord::Base.logger = nil
+
+
+#  blake = User.create(name: "Blake")
+
+# binding.pry
+
+
+CLI.welcome
+
 

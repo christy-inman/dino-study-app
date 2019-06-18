@@ -1,11 +1,11 @@
-require 'pry'
+# require 'pry'
 
-class CLI
+# class CLI
     
-    def self.main_menu
-        puts "Welcome to Dino Facts"
-        puts "Please enter your first name: "
-        @response = gets.chomp
+#     def self.main_menu
+#         puts "Welcome to Dino Facts"
+#         puts "Please enter your first name: "
+#         @response = gets.chomp
     
-    end
-end
+#     end
+# end

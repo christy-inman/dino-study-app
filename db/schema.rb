@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 2019_06_18_151032) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.string "user_id"
-    t.string "dino_id"
+    t.integer "user_id"
+    t.integer "dinosaur_id"
+    t.index ["dinosaur_id"], name: "index_favorites_on_dinosaur_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_224509) do
     t.string "weight"
     t.string "location"
     t.string "time_period"
-    t.string "fact"
+    t.text "fact"
   end
 
 end

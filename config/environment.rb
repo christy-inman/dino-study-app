@@ -10,8 +10,3 @@ ActiveRecord::Base.establish_connection(
 )
 
 
- blake = User.create(name: "Blake")
-
-
-
- binding.pry

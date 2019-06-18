@@ -9,7 +9,7 @@ class CreateDinosaursTable < ActiveRecord::Migration[5.2]
       t.string :weight
       t.string :location
       t.string :time_period
-      t.string :fact
+      t.text :fact
     end
   end
 end

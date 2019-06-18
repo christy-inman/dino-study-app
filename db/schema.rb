@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2019_06_18_151032) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "favorites"
   end
 
 end

@@ -58,52 +58,118 @@ class CLI
         end
     end
 
-    # def self.favorite_a_dino
-    #     puts "Write the dinosaurs name that you want to add to your study guide"
-    #     Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
-    #     @fav_dino_response = gets.chomp
-    #     dino = Dinosaur.all.find { | dino | @fav_dino_response == dino[:name] }
-    #     # puts "Please re-enter username:"
-    #     # @user_response = gets.chomp 
-    #     # user = User.all.find{ | user | @@user == user[:name] }
-    #     Favorite.create(user_id: @@user.id, dinosaur_id: dino.id)
-    # end
-
-    # def self.list_dinos_data
-    #     # @dino_response = Allosaurus
-    #     Dinosaur.all.select do | dino |
-    #         dino[:name] == Allosaurus
-    #         puts "Name: #{dino[:name]}" 
-    #         puts "Classification: #{dino[:classification]}" 
-    #         puts "Diet: #{dino[:diet]}"
-    #         puts "Length: #{dino[:length]}" 
-    #         puts "Height: #{dino[:height]}" 
-    #         puts "Weight: #{dino[:weight]}" 
-    #         puts "Location: #{dino[:location]}" 
-    #         puts "Time Period: #{dino[:time_period]}" 
-    #         puts "Quick Fact: #{dino[:fact]}"
-    #     end
-    # end
-
     def self.main_menu
+        puts ""
+        puts ""
         puts "Welcome to the Main Menu, #{@@user.name}"
         puts "What would you like to do today?"
+        puts ""
         puts "1. See All Dinosaurs"
         puts "2. See your favorite dinosaurs"
         puts "3. Quit Studying"
         @response = gets.chomp
         if @response == "1"
-            Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+            puts ""
+            puts ""
+            all_dino_list
         elsif @response == "2"
-            @@user.favorites
-
-            binding.pry
+            see_favs
+        elsif @response == "3"
+            puts "Thanks for studying with us today, hope to see you again soon."
+        else until @response == "1" || @response == "2" || @response == "3"
+            main_menu_response
         end
-
+        end
     end
 
+    def self.all_dino_list
+        Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+        if !dino_info_card
+            main_menu
+        else
+            puts ""
+            puts ""
+            puts "Would you like to save this dinosaur as a favorite? y/n"
+            @ans = gets.chomp
+            if @ans == "y"
+                Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+                main_menu
+            elsif @ans == "n"
+                main_menu  
+            else 
+                until @ans == "y" || @ans == "n"
+                    all_dino_helper
+                end
+            end
+        end
+    end
 
+    def self.dino_info_card
+        puts "Type name of dinosaur you want more information on."
+        @response = gets.chomp
+        if Dinosaur.find_by(name: @response)
+            @@found = Dinosaur.all.find do | dino |
+                dino[:name] == @response
+            end
+            puts "Name: #{@@found.name}" 
+            puts "Classification: #{@@found.classification}" 
+            puts "Diet: #{@@found.diet}"
+            puts "Length: #{@@found.length}" 
+            puts "Height: #{@@found.height}" 
+            puts "Weight: #{@@found.weight}" 
+            puts "Location: #{@@found.location}" 
+            puts "Time Period: #{@@found.time_period}" 
+            puts "Quick Fact: #{@@found.fact}"
+            return true
+        else
+            return false
+        end
+    end
+
+    def self.all_dino_helper
+        puts "Please enter y or n."
+        @ans = gets.chomp
+        if @ans == "y"
+            Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+        elsif @ans == "n"
+            main_menu
+        end
+    end
+
+    def self.see_favs
+        if @@user.favorites.count == 0
+            puts "Sorry, looks like you don't have any favorites saved."
+        else
+            var = @@user.favorites.map do |obj|
+                obj.dinosaur_id
+            end
+            counter = 1
+            var.each do |int|
+                Dinosaur.all.each do |x|
+                    if int == x.id
+                        puts "#{counter}. #{x.name}"
+                    end
+                end
+                counter += 1
+            end
+        end
+        dino_info_card
+        main_menu
+    end
+
+    def self.main_menu_response
+        puts "Please enter 1, 2, or 3."
+        @response = gets.chomp
+        if @response == "1"
+            Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+        elsif @response == "2"
+            see_favs
+        elsif @response == "3"
+            puts "Thanks for studying with us today, hope to see you again soon."
+        end
+    end
 end
+
 
     
 

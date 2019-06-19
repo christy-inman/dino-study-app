@@ -49,9 +49,31 @@ class CLI
         end
     end
 
-    def numbered_list_of_dinosaurs
-        Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. - #{dino[:name]}"}
+    def self.favorite_a_dino
+        puts "Write the dinosaurs name that you want to add to your study guide"
+        Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. - #{dino[:name]}" }
+        @fav_dino_response = gets.chomp
+        dino = Dinosaur.all.find { | dino | @fav_dino_response == dino[:name] }
+        puts "Please re-enter username: "
+        @user_response = gets.chomp 
+        user = User.all.find{ | user | @user_response == user[:name] }
+        Favorite.create(user_id: user.id, dinosaur_id: dino.id)
     end
+
+    def self.list_dinos_data
+        Dinosaur.all.each do | dino |
+            puts "Name: #{dino[:name]}" 
+            puts "Classification: #{dino[:classification]}" 
+            puts "Diet: #{dino[:diet]}"
+            puts "Length: #{dino[:length]}" 
+            puts "Height: #{dino[:height]}" 
+            puts "Weight: #{dino[:weight]}" 
+            puts "Location: #{dino[:location]}" 
+            puts "Time Period: #{dino[:time_period]}" 
+            puts "Quick Fact: #{dino[:fact]}"
+        end
+    end
+
 
 end
 

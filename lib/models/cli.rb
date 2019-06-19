@@ -15,6 +15,7 @@ class CLI
             response
         end
       end
+      main_menu
     end
 
     def self.sign_in
@@ -22,7 +23,7 @@ class CLI
         @sign_in = gets.chomp
         if User.find_by(name: @sign_in)
             @@user = User.find_by(name: @sign_in)
-          puts "Welcome back, #{@sign_in}!"
+          puts "Welcome back, #{@@user.name}!"
         else 
           puts "Looks like you haven't studied with us before."
           sign_up
@@ -57,36 +58,48 @@ class CLI
         end
     end
 
-    def self.favorite_a_dino
-        puts "Write the dinosaurs name that you want to add to your study guide"
-        Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. - #{dino[:name]}" }
-        @fav_dino_response = gets.chomp
-        dino = Dinosaur.all.find { | dino | @fav_dino_response == dino[:name] }
-        # puts "Please re-enter username:"
-        # @user_response = gets.chomp 
-        # user = User.all.find{ | user | @@user == user[:name] }
-        Favorite.create(user_id: @@user.id, dinosaur_id: dino.id)
-    end
+    # def self.favorite_a_dino
+    #     puts "Write the dinosaurs name that you want to add to your study guide"
+    #     Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+    #     @fav_dino_response = gets.chomp
+    #     dino = Dinosaur.all.find { | dino | @fav_dino_response == dino[:name] }
+    #     # puts "Please re-enter username:"
+    #     # @user_response = gets.chomp 
+    #     # user = User.all.find{ | user | @@user == user[:name] }
+    #     Favorite.create(user_id: @@user.id, dinosaur_id: dino.id)
+    # end
 
-    def self.list_dinos_data
-        # @dino_response = Allosaurus
-        Dinosaur.all.select do | dino |
-            dino[:name] == Allosaurus
-            puts "Name: #{dino[:name]}" 
-            puts "Classification: #{dino[:classification]}" 
-            puts "Diet: #{dino[:diet]}"
-            puts "Length: #{dino[:length]}" 
-            puts "Height: #{dino[:height]}" 
-            puts "Weight: #{dino[:weight]}" 
-            puts "Location: #{dino[:location]}" 
-            puts "Time Period: #{dino[:time_period]}" 
-            puts "Quick Fact: #{dino[:fact]}"
-        end
-    end
+    # def self.list_dinos_data
+    #     # @dino_response = Allosaurus
+    #     Dinosaur.all.select do | dino |
+    #         dino[:name] == Allosaurus
+    #         puts "Name: #{dino[:name]}" 
+    #         puts "Classification: #{dino[:classification]}" 
+    #         puts "Diet: #{dino[:diet]}"
+    #         puts "Length: #{dino[:length]}" 
+    #         puts "Height: #{dino[:height]}" 
+    #         puts "Weight: #{dino[:weight]}" 
+    #         puts "Location: #{dino[:location]}" 
+    #         puts "Time Period: #{dino[:time_period]}" 
+    #         puts "Quick Fact: #{dino[:fact]}"
+    #     end
+    # end
 
     def self.main_menu
-        puts "Welcome to the Main Menu"
-        puts "Enter 
+        puts "Welcome to the Main Menu, #{@@user.name}"
+        puts "What would you like to do today?"
+        puts "1. See All Dinosaurs"
+        puts "2. See your favorite dinosaurs"
+        puts "3. Quit Studying"
+        @response = gets.chomp
+        if @response == "1"
+            Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+        elsif @response == "2"
+            @@user.favorites
+
+            binding.pry
+        end
+
     end
 
 

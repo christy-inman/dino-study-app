@@ -17,6 +17,6 @@ ActiveRecord::Base.establish_connection(
 # binding.pry
 
 
-CLI.list_dinos_data
- binding.pry
+CLI.welcome
+ 
 

@@ -12,11 +12,11 @@ ActiveRecord::Base.establish_connection(
 # ActiveRecord::Base.logger = nil
 
 
-#  blake = User.create(name: "Blake")
+
 
 # binding.pry
 
 
 CLI.welcome
-
+ 
 

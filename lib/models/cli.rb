@@ -48,15 +48,6 @@ class CLI
             sign_up
         end
     end
-
-    def self.try_again
-        until @new_user.valid? do
-           puts "Looks like that username already exists. Try another one."
-           sign_up
-        end
-    end
-
-
 end
 
     

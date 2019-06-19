@@ -3,7 +3,7 @@ require 'pry'
 class CLI
     
     def self.welcome
-        puts "Welcome to Dino Study Guide, let's get started"
+        puts "Welcome to Dino Study Guide, let's get started!"
         puts "1. sign-in" 
         puts "2. sign-up"
         @response = gets.chomp
@@ -14,16 +14,14 @@ class CLI
         else until @response == "1" || @response == "2"
             response
         end
-        end
-        
-        
+      end
     end
 
     def self.sign_in
         puts "Enter username:"
         @sign_in = gets.chomp
         if User.find_by(name: @sign_in)
-          puts "Welcome back #{@sign_in}!"
+          puts "Welcome back, #{@sign_in}!"
         else 
           puts "Looks like you haven't studied with us before."
           sign_up
@@ -35,11 +33,10 @@ class CLI
         @sign_up = gets.chomp
         @new_user = User.create(name: @sign_up)
         if @new_user.valid?
-            puts "Welcome to Dino Study Guide, #{@new_user.name}"
+            puts "Welcome to Dino Study Guide, #{@new_user.name}!"
         else
           try_again
         end
-
     end
 
     def self.response
@@ -66,10 +63,7 @@ end
 
     
     
-    # def self.main_menu
-    #     puts "Please enter user_name: "
-    #     gets.chomp
-    # end
+    
 
 
 

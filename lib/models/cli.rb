@@ -28,7 +28,7 @@ class CLI
         end
     end
 
-    def self.sign_up                   #working
+    def self.sign_up               
         puts "Create username:"
         @sign_up = gets.chomp
         @new_user = User.create(name: @sign_up)
@@ -48,6 +48,11 @@ class CLI
             sign_up
         end
     end
+
+    def numbered_list_of_dinosaurs
+        Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. - #{dino[:name]}"}
+    end
+
 end
 
     

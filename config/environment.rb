@@ -9,7 +9,7 @@ ActiveRecord::Base.establish_connection(
     database: "db/dinosaur_facts.db"
 )
 
-# ActiveRecord::Base.logger = nil
+ActiveRecord::Base.logger = nil
 
 
 

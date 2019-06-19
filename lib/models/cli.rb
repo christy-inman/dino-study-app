@@ -4,8 +4,9 @@ class CLI
     
     def self.welcome
         puts "Welcome to Dino Study Guide, let's get started!"
-        puts "1. sign-in" 
-        puts "2. sign-up"
+        puts ""
+        puts "1. Sign-in" 
+        puts "2. Sign-up"
         @response = gets.chomp
         if @response == "1"
             sign_in
@@ -60,13 +61,12 @@ class CLI
 
     def self.main_menu
         puts ""
-        puts ""
-        puts "Welcome to the Main Menu, #{@@user.name}"
+        puts "Main Menu:"
         puts "What would you like to do today?"
         puts ""
-        puts "1. See All Dinosaurs"
-        puts "2. See your favorite dinosaurs"
-        puts "3. Quit Studying"
+        puts "1. See all dinosaurs."
+        puts "2. See your favorite dinosaurs."
+        puts "3. Quit studying."
         @response = gets.chomp
         if @response == "1"
             puts ""
@@ -84,6 +84,8 @@ class CLI
 
     def self.all_dino_list
         Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+        puts "Type name of dinosaur you want more information on."
+        puts "Or press enter to return to the Main Menu."
         if !dino_info_card
             main_menu
         else
@@ -105,7 +107,6 @@ class CLI
     end
 
     def self.dino_info_card
-        puts "Type name of dinosaur you want more information on."
         @response = gets.chomp
         if Dinosaur.find_by(name: @response)
             @@found = Dinosaur.all.find do | dino |
@@ -127,7 +128,7 @@ class CLI
     end
 
     def self.all_dino_helper
-        puts "Please enter y or n."
+        puts "Please enter y or n:"
         @ans = gets.chomp
         if @ans == "y"
             Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
@@ -139,6 +140,7 @@ class CLI
     def self.see_favs
         if @@user.favorites.count == 0
             puts "Sorry, looks like you don't have any favorites saved."
+            main_menu
         else
             var = @@user.favorites.map do |obj|
                 obj.dinosaur_id
@@ -153,6 +155,8 @@ class CLI
                 counter += 1
             end
         end
+        puts "Type name of dinosaur you want more information on."
+        puts "Or press enter to return to Main Menu."
         dino_info_card
         main_menu
     end

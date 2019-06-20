@@ -187,7 +187,18 @@ class CLI
     end
 
     def self.new_favorite
-        Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+        if @@user.favorites.count == 0
+            Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+        else 
+            @@user.favorites.each do |user_obj| 
+                if @@found.name == user_obj.dinosaur.name
+                    puts ""
+                    puts "Looks like that dinosaur is already in your favorites!".black.on_cyan
+                else
+                    Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+                end
+            end
+        end
     end
 
     def self.save_favorite
@@ -210,6 +221,7 @@ class CLI
        main_menu
     end
 end
+
 
 
 

@@ -111,6 +111,7 @@ class CLI
         if !dino_info_card
             main_menu
         end
+        main_menu
     end
 
     def self.dino_info_card
@@ -155,8 +156,8 @@ class CLI
             puts ""
             puts "Type name of dinosaur you want more information on.".black.on_cyan
             puts "Or press enter to return to Main Menu.".black.on_cyan
-            dino_info_card
             puts ""
+            dino_info_card
         end
         main_menu
     end
@@ -191,17 +192,16 @@ class CLI
 
     def self.save_favorite
         puts "Would you like to save this dinosaur as a favorite? y/n".black.on_green
-            @ans = gets.chomp
-            case @ans
-            when "y"
-                new_favorite
-            when "n"
-            else 
-                until @ans == "y" || @ans == "n"
-                    all_dino_helper
-                end
+        @ans = gets.chomp
+        case @ans
+        when "y"
+            new_favorite
+        when "n"
+        else 
+            until @ans == "y" || @ans == "n"
+                all_dino_helper
             end
-        main_menu
+        end
     end
 
     def self.random_fact

@@ -1,7 +1,8 @@
-require "sinatra/activerecord"
+require 'sinatra/activerecord'
 require 'pry'
 require 'sqlite3'
 require 'require_all'
+require 'colorize'
 require_all 'lib'
 
 ActiveRecord::Base.establish_connection(

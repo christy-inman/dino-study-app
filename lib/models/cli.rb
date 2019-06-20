@@ -47,9 +47,10 @@ class CLI
     def self.response
         puts "Please enter 1 or 2: "
         @response = gets.chomp
-        if @response == "1"
+        case @response 
+        when "1"
             sign_in
-        elsif @response == "2"
+        when "2"
             sign_up
         end
     end
@@ -97,10 +98,11 @@ class CLI
             puts ""
             puts "Would you like to save this dinosaur as a favorite? y/n"
             @ans = gets.chomp
-            if @ans == "y"
+            case @ans
+            when "y"
                 Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
                 main_menu
-            elsif @ans == "n"
+            when "n"
                 main_menu  
             else 
                 until @ans == "y" || @ans == "n"
@@ -145,16 +147,7 @@ class CLI
             puts "Sorry, looks like you don't have any favorites saved."
             main_menu
         else
-            var = @@user.favorites.map { |obj| obj.dinosaur_id }
-            counter = 1
-            var.each do |int|
-                Dinosaur.all.each do |x|
-                    if int == x.id
-                        puts "#{counter}. #{x.name}"
-                    end
-                end
-                counter += 1
-            end
+            existing_favs_list
         end
         puts "Type name of dinosaur you want more information on."
         puts "Or press enter to return to Main Menu."
@@ -174,6 +167,20 @@ class CLI
             puts "Thanks for studying with us today, hope to see you again soon."
         end
     end
+
+    def self.existing_favs_list
+        var = @@user.favorites.map { |obj| obj.dinosaur_id }
+        counter = 1
+        var.each do |int|
+            Dinosaur.all.each do |x|
+                if int == x.id
+                    puts "#{counter}. #{x.name}"
+                end
+            end
+          counter += 1
+        end
+    end
+
 end
 
 

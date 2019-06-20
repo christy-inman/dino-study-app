@@ -169,18 +169,12 @@ class CLI
     end
 
     def self.existing_favs_list
-        var = @@user.favorites.map { |obj| obj.dinosaur_id }
         counter = 1
-        var.each do |int|
-            Dinosaur.all.each do |x|
-                if int == x.id
-                    puts "#{counter}. #{x.name}"
-                end
-            end
-          counter += 1
+        @@user.favorites.each do |user_obj| 
+            puts "#{counter}. #{user_obj.dinosaur.name}" 
+            counter += 1 
         end
     end
-
 end
 
 

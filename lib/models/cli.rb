@@ -143,58 +143,26 @@ class CLI
         end
     end
 
-<<<<<<< HEAD
     def self.all_dino_helper
         puts "Please enter y or n:".red.bold
         @ans = gets.chomp
-        if @ans == "y"
-            Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
-        elsif @ans == "n"
+        case @ans  
+        when "y"
+            new_favorite
+        when "n"
         end
     end
 
     def self.see_favs
         if @@user.favorites.count == 0
-            puts "Sorry, looks like you don't have any favorites saved.".colorize(:black).on_cyan
+            puts "Sorry, looks like you don't have any favorites saved.".black.on_cyan
         else
             puts "Your Favorites:".black.on_cyan.blink
             puts ""
-            var = @@user.favorites.map do |obj|
-                obj.dinosaur_id
-            end
-            counter = 1
-            var.each do |int|
-                Dinosaur.all.each do |x|
-                    if int == x.id
-                        puts "#{counter}. #{x.name}".cyan
-                    end
-                end
-                counter += 1
-            end
-            puts ""
-            puts "Type name of dinosaur you want more information on.".colorize(:black).on_cyan
+            existing_favs_list
+            puts "Type name of dinosaur you want more information on.".black.on_cyan
             puts "Or press enter to return to Main Menu.".black.on_cyan
             dino_info_card
-=======
-    # def self.all_dino_helper
-    #     puts "Please enter y or n:"
-    #     @ans = gets.chomp
-    #     case @ans  
-    #     when "y"
-    #         new_favorite
-    #     when "n"
-    #     end
-    # end
-
-    def self.see_favs
-        if @@user.favorites.count == 0
-            puts "Sorry, looks like you don't have any favorites saved."
-        else
-            existing_favs_list
-        puts "Type name of dinosaur you want more information on."
-        puts "Or press enter to return to Main Menu."
-        dino_info_card
->>>>>>> 7e56b580446d8c72034818b50d9f712af0c8996f
         end
         main_menu
     end
@@ -202,32 +170,21 @@ class CLI
     def self.main_menu_response
         puts "Please enter 1, 2, or 3:".red.bold
         @response = gets.chomp
-<<<<<<< HEAD
-        if @response == "1"
-            all_dino_list
-        elsif @response == "2"
-            see_favs
-        elsif @response == "3"
-            puts ""
-            puts "Thanks for studying with us today, hope to see you again soon #{@@user.name}!".colorize(:black).on_magenta.blink
-        end
-    end
-
-=======
         case @response 
         when "1"
             all_dino_list
         when "2"
             see_favs
         when "3"
-            puts "Thanks for studying with us today, hope to see you again soon."
+            puts ""
+            puts "Thanks for studying with us today, hope to see you again soon #{@@user.name}!".colorize(:black).on_magenta.blink
         end
     end
 
     def self.existing_favs_list
         counter = 1
         @@user.favorites.each do |user_obj| 
-            puts "#{counter}. #{user_obj.dinosaur.name}" 
+            puts "#{counter}. #{user_obj.dinosaur.name}".cyan 
             counter += 1 
         end
     end
@@ -236,7 +193,6 @@ class CLI
         Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
     end
 
->>>>>>> 7e56b580446d8c72034818b50d9f712af0c8996f
 end
 
 

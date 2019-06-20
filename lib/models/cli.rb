@@ -77,7 +77,8 @@ class CLI
         puts ""
         puts "1. See all dinosaurs.".magenta
         puts "2. See your favorite dinosaurs.".magenta
-        puts "3. Quit studying.".magenta
+        puts "3. See a random dinosaur fact.".magenta
+        puts "4. Quit studying.".magenta
         @response = gets.chomp
         case @response 
         when "1"
@@ -88,9 +89,12 @@ class CLI
             see_favs
         when "3"
             puts ""
+            random_fact
+        when "4"
+            puts ""
             puts "Thanks for studying with us today, hope to see you again soon #{@@user.name}!".colorize(:black).on_magenta.blink
         else 
-            until @response == "1" || @response == "2" || @response == "3"
+            until @response == "1" || @response == "2" || @response == "3" || @response == "4"
                 main_menu_response
             end
         end
@@ -98,7 +102,7 @@ class CLI
 
     def self.all_dino_list
         puts ""
-        puts "All Dinosaurs:".black.on_green
+        puts "All Dinosaurs:".black.on_green.blink
         puts ""
         Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}".colorize(:green) }
         puts ""
@@ -112,7 +116,7 @@ class CLI
     def self.dino_info_card
         @response = gets.chomp
         if Dinosaur.find_by(name: @response.capitalize)
-            @@found = Dinosaur.all.find { |dino| dino[:name] == @response.capitalize }
+            @@found = Dinosaur.find_by(name: @response.capitalize)
             puts ""
             puts "Name".green.underline + ": #{@@found.name}".green 
             puts "Classification".green.underline + ": #{@@found.classification}".green  
@@ -158,7 +162,7 @@ class CLI
     end
 
     def self.main_menu_response
-        puts "Please enter 1, 2, or 3:".red.bold
+        puts "Please enter 1, 2, 3, or 4:".red.bold
         @response = gets.chomp
         case @response 
         when "1"
@@ -166,6 +170,8 @@ class CLI
         when "2"
             see_favs
         when "3"
+            random_fact
+        when "4"
             puts ""
             puts "Thanks for studying with us today, hope to see you again soon #{@@user.name}!".colorize(:black).on_magenta.blink
         end
@@ -196,6 +202,12 @@ class CLI
                 end
             end
         main_menu
+    end
+
+    def self.random_fact
+       fact = Dinosaur.all.map { |obj| obj[:fact] }.sample
+       puts "#{fact}".colorize(:yellow)
+       main_menu
     end
 end
 

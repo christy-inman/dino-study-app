@@ -38,13 +38,8 @@ class CLI
         end
     end
 
-<<<<<<< HEAD
-    def self.sign_up
-        puts ""            
-=======
     def self.sign_up            
         puts ""
->>>>>>> d4f51accda9950a29e9b4166ad2962206cb30d7b
         puts "Create username:".colorize(:black).on_magenta
         @sign_up = gets.chomp
         @@user = User.create(name: @sign_up)
@@ -118,8 +113,8 @@ class CLI
         @response = gets.chomp
         if Dinosaur.find_by(name: @response.capitalize)
             @@found = Dinosaur.find_by(name: @response.capitalize)
-            # puts ""
-            puts "\n""Name".green.underline + ": #{@@found.name}".green 
+            puts ""
+            puts "Name".green.underline + ": #{@@found.name}".green 
             puts "Classification".green.underline + ": #{@@found.classification}".green  
             puts "Diet".green.underline + ": #{@@found.diet}".green 
             puts "Length".green.underline + ": #{@@found.length}".green  

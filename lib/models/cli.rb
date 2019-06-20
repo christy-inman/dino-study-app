@@ -4,17 +4,20 @@ class CLI
     
     def self.welcome
         puts "Welcome to Dino Study Guide, let's get started!"
-        puts "1. sign-in" 
-        puts "2. sign-up"
+        puts ""
+        puts "1. Sign-in" 
+        puts "2. Sign-up"
         @response = gets.chomp
-        if @response == "1"
+        case @response 
+        when "1"
             sign_in
-        elsif @response == "2"
+        when "2"
             sign_up
-        else until @response == "1" || @response == "2"
+        else
+            until @response == "1" || @response == "2"
             response
+            end
         end
-      end
       main_menu
     end
 
@@ -23,7 +26,7 @@ class CLI
         @sign_in = gets.chomp
         if User.find_by(name: @sign_in)
             @@user = User.find_by(name: @sign_in)
-          puts "Welcome back, #{@@user.name}!"
+          puts "Welcome back, #{@@user.name.capitalize}!"
         else 
           puts "Looks like you haven't studied with us before."
           sign_up
@@ -35,7 +38,7 @@ class CLI
         @sign_up = gets.chomp
         @@user = User.create(name: @sign_up)
         if @@user.valid?
-            puts "Welcome to Dino Study Guide, #{@@user.name}!"
+            puts "Welcome to Dino Study Guide, #{@@user.name.capitalize}!"
         else
           try_again
         end
@@ -60,30 +63,33 @@ class CLI
 
     def self.main_menu
         puts ""
-        puts ""
-        puts "Welcome to the Main Menu, #{@@user.name}"
+        puts "Main Menu:"
         puts "What would you like to do today?"
         puts ""
-        puts "1. See All Dinosaurs"
-        puts "2. See your favorite dinosaurs"
-        puts "3. Quit Studying"
+        puts "1. See all dinosaurs."
+        puts "2. See your favorite dinosaurs."
+        puts "3. Quit studying."
         @response = gets.chomp
-        if @response == "1"
+        case @response 
+        when "1"
             puts ""
             puts ""
             all_dino_list
-        elsif @response == "2"
+        when "2"
             see_favs
-        elsif @response == "3"
+        when "3"
             puts "Thanks for studying with us today, hope to see you again soon."
-        else until @response == "1" || @response == "2" || @response == "3"
+        else 
+            until @response == "1" || @response == "2" || @response == "3"
             main_menu_response
-        end
+            end
         end
     end
 
     def self.all_dino_list
         Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
+        puts "Type name of dinosaur you want more information on."
+        puts "Or press enter to return to the Main Menu."
         if !dino_info_card
             main_menu
         else
@@ -105,12 +111,9 @@ class CLI
     end
 
     def self.dino_info_card
-        puts "Type name of dinosaur you want more information on."
         @response = gets.chomp
         if Dinosaur.find_by(name: @response)
-            @@found = Dinosaur.all.find do | dino |
-                dino[:name] == @response
-            end
+            @@found = Dinosaur.all.find { | dino | dino[:name] == @response }
             puts "Name: #{@@found.name}" 
             puts "Classification: #{@@found.classification}" 
             puts "Diet: #{@@found.diet}"
@@ -127,11 +130,12 @@ class CLI
     end
 
     def self.all_dino_helper
-        puts "Please enter y or n."
+        puts "Please enter y or n:"
         @ans = gets.chomp
-        if @ans == "y"
+        case @ans  
+        when "y"
             Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
-        elsif @ans == "n"
+        when "n"
             main_menu
         end
     end
@@ -139,10 +143,9 @@ class CLI
     def self.see_favs
         if @@user.favorites.count == 0
             puts "Sorry, looks like you don't have any favorites saved."
+            main_menu
         else
-            var = @@user.favorites.map do |obj|
-                obj.dinosaur_id
-            end
+            var = @@user.favorites.map { |obj| obj.dinosaur_id }
             counter = 1
             var.each do |int|
                 Dinosaur.all.each do |x|
@@ -153,6 +156,8 @@ class CLI
                 counter += 1
             end
         end
+        puts "Type name of dinosaur you want more information on."
+        puts "Or press enter to return to Main Menu."
         dino_info_card
         main_menu
     end
@@ -160,11 +165,12 @@ class CLI
     def self.main_menu_response
         puts "Please enter 1, 2, or 3."
         @response = gets.chomp
-        if @response == "1"
-            Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}" }
-        elsif @response == "2"
+        case @response 
+        when "1"
+            all_dino_list
+        when "2"
             see_favs
-        elsif @response == "3"
+        when "3"
             puts "Thanks for studying with us today, hope to see you again soon."
         end
     end

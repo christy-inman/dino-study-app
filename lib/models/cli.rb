@@ -111,6 +111,7 @@ class CLI
         if !dino_info_card
             main_menu
         end
+        main_menu
     end
 
     def self.dino_info_card
@@ -186,22 +187,32 @@ class CLI
     end
 
     def self.new_favorite
-        Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+        if @@user.favorites.count == 0
+            Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+        else 
+            @@user.favorites.each do |user_obj| 
+                if @@found.name == user_obj.dinosaur.name
+                    puts ""
+                    puts "Looks like that dinosaur is already in your favorites!".black.on_cyan
+                else
+                    Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+                end
+            end
+        end
     end
 
     def self.save_favorite
         puts "Would you like to save this dinosaur as a favorite? y/n".black.on_green
-            @ans = gets.chomp
-            case @ans
-            when "y"
-                new_favorite
-            when "n"
-            else 
-                until @ans == "y" || @ans == "n"
-                    all_dino_helper
-                end
+        @ans = gets.chomp
+        case @ans
+        when "y"
+            new_favorite
+        when "n"
+        else 
+            until @ans == "y" || @ans == "n"
+                all_dino_helper
             end
-        main_menu
+        end
     end
 
     def self.random_fact
@@ -210,6 +221,7 @@ class CLI
        main_menu
     end
 end
+
 
 
 

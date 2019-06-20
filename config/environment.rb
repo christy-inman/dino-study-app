@@ -3,13 +3,15 @@ require 'pry'
 require 'sqlite3'
 require 'require_all'
 require_all 'lib'
+require 'colorize' 
+require 'colorized_string'
 
 ActiveRecord::Base.establish_connection(
     adapter: "sqlite3",
     database: "db/dinosaur_facts.db"
 )
 
-# ActiveRecord::Base.logger = nil
+ActiveRecord::Base.logger = nil
 
 
 

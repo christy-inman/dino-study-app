@@ -20,6 +20,6 @@ ActiveRecord::Base.logger = nil
 # binding.pry
 
 
-CLI.welcome
+CLI.random_fact
  
 

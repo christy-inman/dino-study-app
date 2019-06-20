@@ -100,15 +100,15 @@ class CLI
             @ans = gets.chomp
             case @ans
             when "y"
-                Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
-                main_menu
+                new_favorite
             when "n"
-                main_menu  
+
             else 
                 until @ans == "y" || @ans == "n"
                     all_dino_helper
                 end
             end
+          main_menu  
         end
     end
 
@@ -131,27 +131,25 @@ class CLI
         end
     end
 
-    def self.all_dino_helper
-        puts "Please enter y or n:"
-        @ans = gets.chomp
-        case @ans  
-        when "y"
-            Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
-        when "n"
-            main_menu
-        end
-    end
+    # def self.all_dino_helper
+    #     puts "Please enter y or n:"
+    #     @ans = gets.chomp
+    #     case @ans  
+    #     when "y"
+    #         new_favorite
+    #     when "n"
+    #     end
+    # end
 
     def self.see_favs
         if @@user.favorites.count == 0
             puts "Sorry, looks like you don't have any favorites saved."
-            main_menu
         else
             existing_favs_list
-        end
         puts "Type name of dinosaur you want more information on."
         puts "Or press enter to return to Main Menu."
         dino_info_card
+        end
         main_menu
     end
 
@@ -175,6 +173,11 @@ class CLI
             counter += 1 
         end
     end
+
+    def self.new_favorite
+        Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
+    end
+
 end
 
 

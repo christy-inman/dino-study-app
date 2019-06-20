@@ -24,6 +24,7 @@ class CLI
     end
 
     def self.sign_in
+        puts ""
         puts "Enter username:".colorize(:black).on_magenta
         @sign_in = gets.chomp
         if User.find_by(name: @sign_in)
@@ -37,7 +38,8 @@ class CLI
         end
     end
 
-    def self.sign_up            
+    def self.sign_up
+        puts ""            
         puts "Create username:".colorize(:black).on_magenta
         @sign_up = gets.chomp
         @@user = User.create(name: @sign_up)
@@ -86,7 +88,7 @@ class CLI
             see_favs
         when "3"
             puts ""
-            puts "Thanks for studying with us today, hope to see you again soon.".colorize(:black).on_magenta.blink
+            puts "Thanks for studying with us today, hope to see you again soon #{@@user.name}!".colorize(:black).on_magenta.blink
         else 
             until @response == "1" || @response == "2" || @response == "3"
             main_menu_response
@@ -96,7 +98,7 @@ class CLI
 
     def self.all_dino_list
         puts ""
-        puts "All Dinosaurs:".black.on_green
+        puts "All Dinosaurs:".black.on_green.blink
         puts ""
         Dinosaur.all.each_with_index { | dino, index | puts "#{index += 1}. #{dino[:name]}".colorize(:green) }
         puts ""
@@ -126,9 +128,9 @@ class CLI
     def self.dino_info_card
         @response = gets.chomp
         if Dinosaur.find_by(name: @response.capitalize)
-            @@found = Dinosaur.all.find { |dino| dino[:name] == @response.capitalize }
-            puts ""
-            puts "Name".green.underline + ": #{@@found.name}".green 
+            @@found = Dinosaur.find_by(name: @response.capitalize)
+            # puts ""
+            puts "\n""Name".green.underline + ": #{@@found.name}".green 
             puts "Classification".green.underline + ": #{@@found.classification}".green  
             puts "Diet".green.underline + ": #{@@found.diet}".green 
             puts "Length".green.underline + ": #{@@found.length}".green  
@@ -160,6 +162,7 @@ class CLI
             puts "Your Favorites:".black.on_cyan.blink
             puts ""
             existing_favs_list
+            puts ""
             puts "Type name of dinosaur you want more information on.".black.on_cyan
             puts "Or press enter to return to Main Menu.".black.on_cyan
             dino_info_card
@@ -183,7 +186,7 @@ class CLI
 
     def self.existing_favs_list
         counter = 1
-        @@user.favorites.each do |user_obj| 
+        @@user.favorites.reload.each do |user_obj| 
             puts "#{counter}. #{user_obj.dinosaur.name}".cyan 
             counter += 1 
         end

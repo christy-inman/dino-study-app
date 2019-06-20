@@ -226,7 +226,7 @@ Dinosaur.create(
 )
 
 Dinosaur.create(
-    name: "Tyrannosaurus Rex", 
+    name: "T-rex", 
     classification: "Theropod", 
     diet: "Carnivore", 
     length: "40 feet", 
@@ -234,7 +234,7 @@ Dinosaur.create(
     weight: "8 tons", 
     location: "Western North America, Mongolia", 
     time_period: "Late Cretaceous Period", 
-    fact: "T-rex had large heads and jaws,  powerful hind limbs 
+    fact: "Tyrannosaurus Rex had large heads and jaws,  powerful hind limbs 
         with a bipedal gate. short  arms and two clawed fingers, 
         and long thick tails. They were also equipped with excellent 
         vision and a highly developed sense of smell."

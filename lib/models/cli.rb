@@ -156,8 +156,8 @@ class CLI
             puts ""
             puts "Type name of dinosaur you want more information on.".black.on_cyan
             puts "Or press enter to return to Main Menu.".black.on_cyan
-            dino_info_card
             puts ""
+            dino_info_card
         end
         main_menu
     end

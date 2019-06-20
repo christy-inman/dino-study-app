@@ -84,7 +84,7 @@ Dinosaur.create(
     weight: "3-4 tons", 
     location: "Western North America", 
     time_period: "Late Cretaceous Period", 
-    fact: "It ate plants with a toothless duck-like bill. 
+    fact: "Corythosaurus ate plants with a toothless duck-like bill. 
         Some fossils have been found with the contents of their 
         stomach still there! The meal included conifer needles, fruits, 
         seeds, and twigs."
@@ -177,7 +177,7 @@ Dinosaur.create(
         but it has been hypothesized that the prominent crest on its 
         head, which was a long curved hollow tube-like structure 
         protruding from the nose upwards and back from the skull, 
-        might have been used as a communication system. The dinosaur 
+        might have been used as a communication system. Parasaurolophus 
         would blow through its nose and the sound would come out 
         through the crest."
 )
@@ -234,7 +234,7 @@ Dinosaur.create(
     weight: "8 tons", 
     location: "Western North America, Mongolia", 
     time_period: "Late Cretaceous Period", 
-    fact: "Tyrannosaurus Rex had large heads and jaws,  powerful hind limbs 
+    fact: "Tyrannosaurus Rex had large heads and jaws, powerful hind limbs 
         with a bipedal gate. short  arms and two clawed fingers, 
         and long thick tails. They were also equipped with excellent 
         vision and a highly developed sense of smell."
@@ -249,7 +249,7 @@ Dinosaur.create(
     weight: "6-12 tons", 
     location: "Western North America", 
     time_period: "Late Cretaceous Period", 
-    fact: "The first fossil of mostly intact triceratops skull was 
+    fact: "The first fossil of mostly intact Triceratops skull was 
         found in 1887 in Denver, Colorado. Some say the horns were 
         for attracting mates or showing dominance, similar to antlers 
         of a deer or horns of a mountain goat."

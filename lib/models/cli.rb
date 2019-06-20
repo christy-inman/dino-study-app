@@ -20,10 +20,11 @@ class CLI
             response
             end
         end
-      main_menu
+        main_menu
     end
 
     def self.sign_in
+        puts ""
         puts "Enter username:".colorize(:black).on_magenta
         @sign_in = gets.chomp
         if User.find_by(name: @sign_in)
@@ -38,6 +39,7 @@ class CLI
     end
 
     def self.sign_up            
+        puts ""
         puts "Create username:".colorize(:black).on_magenta
         @sign_up = gets.chomp
         @@user = User.create(name: @sign_up)
@@ -45,7 +47,7 @@ class CLI
             puts ""
             puts "Welcome to Dino Study Guide, #{@@user.name}!".colorize(:black).on_magenta.blink
         else
-          try_again
+            try_again
         end
     end
 
@@ -86,10 +88,10 @@ class CLI
             see_favs
         when "3"
             puts ""
-            puts "Thanks for studying with us today, hope to see you again soon.".colorize(:black).on_magenta.blink
+            puts "Thanks for studying with us today, hope to see you again soon #{@@user.name}!".colorize(:black).on_magenta.blink
         else 
             until @response == "1" || @response == "2" || @response == "3"
-            main_menu_response
+                main_menu_response
             end
         end
     end
@@ -103,22 +105,6 @@ class CLI
         puts "Type the name of the dinosaur you want more information on.".black.on_green
         puts "Or press enter to return to the Main Menu.".black.on_green
         if !dino_info_card
-            main_menu
-        else
-            puts ""
-            puts ""
-            puts "Would you like to save this dinosaur as a favorite? y/n".black.on_green
-            @ans = gets.chomp
-            case @ans
-            when "y"
-                new_favorite
-            when "n"
-
-            else 
-                until @ans == "y" || @ans == "n"
-                    all_dino_helper
-                end
-            end
             main_menu
         end
     end
@@ -137,6 +123,8 @@ class CLI
             puts "Location".green.underline + ": #{@@found.location}".green  
             puts "Time Period".green.underline + ": #{@@found.time_period}".green  
             puts "Quick Fact".green.underline + ": #{@@found.fact}".green
+            puts ""
+            save_favorite
             return true
         else
             return false
@@ -160,9 +148,11 @@ class CLI
             puts "Your Favorites:".black.on_cyan.blink
             puts ""
             existing_favs_list
+            puts ""
             puts "Type name of dinosaur you want more information on.".black.on_cyan
             puts "Or press enter to return to Main Menu.".black.on_cyan
             dino_info_card
+            puts ""
         end
         main_menu
     end
@@ -183,7 +173,7 @@ class CLI
 
     def self.existing_favs_list
         counter = 1
-        @@user.favorites.each do |user_obj| 
+        @@user.favorites.reload.each do |user_obj| 
             puts "#{counter}. #{user_obj.dinosaur.name}".cyan 
             counter += 1 
         end
@@ -193,7 +183,23 @@ class CLI
         Favorite.create(user_id: @@user.id, dinosaur_id: @@found.id)
     end
 
+    def self.save_favorite
+        puts "Would you like to save this dinosaur as a favorite? y/n".black.on_green
+            @ans = gets.chomp
+            case @ans
+            when "y"
+                new_favorite
+            when "n"
+            else 
+                until @ans == "y" || @ans == "n"
+                    all_dino_helper
+                end
+            end
+        main_menu
+    end
 end
+
+
 
 
     

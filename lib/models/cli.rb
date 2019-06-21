@@ -39,7 +39,6 @@ class CLI
     end
 
     def self.sign_up            
-        puts ""
         puts "Create username:".colorize(:black).on_magenta
         @sign_up = gets.chomp
         @@user = User.create(name: @sign_up)
@@ -216,6 +215,8 @@ class CLI
     end
 
     def self.random_fact
+        puts "Random Fact:".black.on_yellow.blink
+        puts ""
        fact = Dinosaur.all.map { |obj| obj[:fact] }.sample
        puts "#{fact}".colorize(:yellow)
        main_menu

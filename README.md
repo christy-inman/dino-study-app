@@ -1,4 +1,4 @@
-# dino-study-app
+# Dino Study App
 CLI app meant to give a basic introduction to a small group of the most popular dinosaurs!  Intended to be a study resource that adds a little bit of interactivity to the sometimes static experience that traditional study guides offer.
 
 

@@ -36,7 +36,7 @@ to check for the version of Ruby on your computer. If it's older than 2.0, or yo
 5) Respond to any code review feedback.
 
 
-Dino Data Source:
+### Dino Data Source:
 
 We are very grateful for the people at https://www.fossils-facts-and-finds.com/ for providing the information that we used to seed our dino database. There is a lot more information on dinosaurs and fossils on the website, so if this app ignited your interest in dinosaurs have their page be your first stop on expanding your dino knowledge!
 

@@ -2,7 +2,7 @@
 CLI app meant to give a basic introduction to a small group of the most popular dinosaurs!  Intended to be a study resource that adds a little bit of interactivity to the sometimes static experience that traditional study guides offer.
 
 
-Install Instructions:
+## Install Instructions:
 
 1) In your browser go to https://code.visualstudio.com/ to download the text editor. Make sure the editor is in your application folder to ensure access to it. We used VSCode but any code text editor should work. If you have one already then just move on to step two.
 
@@ -23,7 +23,7 @@ to check for the version of Ruby on your computer. If it's older than 2.0, or yo
 . This should start the app and get you going on your dino studies!
 
 
-Contributors Guide:
+### Contributors Guide:
 
 1) If you would like to contribute to this application ensure you've followed steps 1-5 of the install instructions.
 

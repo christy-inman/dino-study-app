@@ -4,9 +4,9 @@ CLI app meant to give a basic introduction to a small group of the most popular 
 
 ## Install Instructions:
 
-1) In your browser go to https://code.visualstudio.com/ to download the text editor. Make sure the editor is in your application folder to ensure access to it. We used VSCode but any code text editor should work. If you have one already then just move on to step two.
+1) To use and interact with this CLI app, you will need to have access to a text editor. We used VSCode but any code text editor should work. If you have one already then just move on to step two. If you don't yet have one installed, we recommend you go to https://code.visualstudio.com/ to download the VSCode text editor. Make sure the editor is saved in your application folder to ensure access to it.
 
-2) Open your terminal, most operating systems have one, if you don't find one download Zsh or another popular terminal alternative.
+2) Open your terminal, most operating systems have one, but if you don't find one download Zsh or another popular terminal alternative.
 
 3) While in your terminal run
 ```ruby -v```
